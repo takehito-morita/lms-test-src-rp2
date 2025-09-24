@@ -1,14 +1,20 @@
 package jp.co.sss.lms.ct.util;
 
+
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,7 +38,7 @@ public class WebDriverUtils {
 		System.setProperty("webdriver.chrome.driver", "lib/chromedriver.exe");
 		webDriver = new ChromeDriver();
 	}
-	
+
 	/**
 	 * インスタンス終了
 	 */
@@ -48,7 +54,7 @@ public class WebDriverUtils {
 		webDriver.get(url);
 		pageLoadTimeout(5);
 	}
-	
+
 	/**
 	 * ページロードタイムアウト設定
 	 * @param second
@@ -56,7 +62,7 @@ public class WebDriverUtils {
 	public static void pageLoadTimeout(int second) {
 		webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(second));
 	}
-	
+
 	/**
 	 * 要素の可視性タイムアウト設定
 	 * @param locater
@@ -66,7 +72,7 @@ public class WebDriverUtils {
 		WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(second));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(locater));
 	}
-	
+
 	/**
 	 * 指定ピクセル分だけスクロール
 	 * @param pixel
@@ -75,7 +81,6 @@ public class WebDriverUtils {
 		((JavascriptExecutor) webDriver).executeScript("window.scrollBy(0," + pixel + ");");
 	}
 
-	
 	/**
 	 * 指定位置までスクロール
 	 * @param pixel
@@ -113,6 +118,70 @@ public class WebDriverUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * className取得(複数)
+	 * @param className
+	 */
+	public static List<WebElement> getElementsByClassName(String className) {
+		return webDriver.findElements(By.className(className));
+	}
+
+	/**
+	 * className取得(単体)
+	 * @param className
+	 */
+	public static WebElement getElementByClassName(String className) {
+		return webDriver.findElement(By.className(className));
+	}
+
+	/**
+	 * タイトル取得
+	 */
+	public static String getTitle() {
+		return webDriver.getTitle();
+	}
+
+	/**
+	 * HTMLのname属性を取得し、値を格納
+	 * @param name
+	 * @param key
+	 */
+	public static void nameInput(String name, String key) {
+		final WebElement login_input = WebDriverUtils.webDriver.findElement(By.name(name));
+		login_input.clear();
+		login_input.sendKeys(key);
+	}
+
+	/**
+	 * HTMLのclass属性を取得し、エンターキーを押す
+	 * @param className
+	 */
+	public static void enterKey(String className) {
+		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.className(className));
+		enterKey.sendKeys(Keys.ENTER);
+	}
+
+	/**
+	 * HTMLのclass属性を取得し、結果と合致してるか調べる
+	 * @param result
+	 * @param className
+	 */
+	public static void resultClassName(String result, String className) {
+		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.className(className));
+		System.out.println(enterKey.getText());
+		assertEquals(result, enterKey.getText());
+	}
+
+	/**
+	 * HTMLのタイトルを取得し、結果と合致してるか調べる
+	 * @param result
+	 */
+	public static void resultTitle(String result) {
+		String title = webDriver.getTitle();
+		System.out.println(title);
+		assertEquals(result, title);
 	}
 
 }
