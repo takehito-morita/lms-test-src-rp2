@@ -40,15 +40,27 @@ public class Case04 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	public void test01() {
 		goTo("http://localhost:8080/lms");
+
+		String pegeTitle = WebDriverUtils.getTitle();
+		assertEquals("ログイン | LMS", pegeTitle);
+
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
 	@Order(2)
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
-	public void test02() {
+	public void test02() throws InterruptedException {
 		WebDriverUtils.nameInput("loginId", "StudentAA03");
 		WebDriverUtils.nameInput("password", "StudentAA033");
 		WebDriverUtils.enterKey("btn");
+
+		String pegeTitle = WebDriverUtils.getTitle();
+		assertEquals("コース詳細 | LMS", pegeTitle);
+
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
@@ -57,6 +69,12 @@ public class Case04 {
 	public void test03() {
 		WebDriverUtils.webDriver.findElement(By.className("dropdown-toggle")).click();
 		WebDriverUtils.webDriver.findElement(By.xpath("//*[text()=\"ヘルプ\"]")).click();
+
+		String pegeTitle = WebDriverUtils.getTitle();
+		assertEquals("ヘルプ | LMS", pegeTitle);
+
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
@@ -80,6 +98,7 @@ public class Case04 {
 
 		getEvidence(new Object() {
 		});
+
 	}
 
 }
