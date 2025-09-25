@@ -1,7 +1,7 @@
 package jp.co.sss.lms.ct.f02_faq;
 
-
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
+import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,6 +10,9 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.openqa.selenium.By;
+
+import jp.co.sss.lms.ct.util.WebDriverUtils;
 
 /**
  * 結合テスト よくある質問機能
@@ -36,28 +39,47 @@ public class Case04 {
 	@Order(1)
 	@DisplayName("テスト01 トップページURLでアクセス")
 	public void test01() {
-		// TODO ここに追加
+		goTo("http://localhost:8080/lms");
 	}
 
 	@Test
 	@Order(2)
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	public void test02() {
-		// TODO ここに追加
+		WebDriverUtils.nameInput("loginId", "StudentAA03");
+		WebDriverUtils.nameInput("password", "StudentAA033");
+		WebDriverUtils.enterKey("btn");
 	}
 
 	@Test
 	@Order(3)
 	@DisplayName("テスト03 上部メニューの「ヘルプ」リンクからヘルプ画面に遷移")
 	public void test03() {
-		// TODO ここに追加
+		WebDriverUtils.webDriver.findElement(By.className("dropdown-toggle")).click();
+		WebDriverUtils.webDriver.findElement(By.xpath("//*[text()=\"ヘルプ\"]")).click();
 	}
 
 	@Test
 	@Order(4)
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	public void test04() {
-		// TODO ここに追加
+
+		WebDriverUtils.webDriver.findElement(By.linkText("よくある質問")).click();
+
+		/*「よくある質問」リンク(aタグ)は別タブを開くため、
+		 * 新しいウィンドウで作業するには、それに切り替える必要があります。
+		 * 下記コードではWebDriverが表示できる両方のウィンドウまたはタブをループし、
+		 * 元のウィンドウまたはタブに切り替えることができます。
+		*/
+		Object[] windowHandles = WebDriverUtils.webDriver.getWindowHandles().toArray();
+		WebDriverUtils.webDriver.switchTo().window((String) windowHandles[1]);
+
+		System.out.println(WebDriverUtils.webDriver.getTitle());
+		String title = WebDriverUtils.webDriver.getTitle();
+		assertEquals("よくある質問 | LMS", title);
+
+		getEvidence(new Object() {
+		});
 	}
 
 }

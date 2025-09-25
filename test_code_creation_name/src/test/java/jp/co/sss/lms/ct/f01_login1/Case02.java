@@ -1,6 +1,5 @@
 package jp.co.sss.lms.ct.f01_login1;
 
-
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
 
 import org.junit.jupiter.api.AfterAll;
@@ -52,12 +51,13 @@ public class Case02 {
 		WebDriverUtils.nameInput("password", "pass_er");
 		WebDriverUtils.enterKey("btn");
 
+		//  59行目のコードでもできるが、56行目～58行目のコードではうまくいかない。
 		//		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		//		final WebDriverWait wait = new WebDriverWait(webDriver, 60); 
 		//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("message"))); 
 		Thread.sleep(1000);
 
-		WebDriverUtils.resultClassName("* ログインに失敗しました。", "help-inline");
+		WebDriverUtils.resultClassName("help-inline", "* ログインに失敗しました。");
 
 		getEvidence(new Object() {
 		});

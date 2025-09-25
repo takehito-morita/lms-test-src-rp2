@@ -1,6 +1,5 @@
 package jp.co.sss.lms.ct.util;
 
-
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -168,7 +167,7 @@ public class WebDriverUtils {
 	 * @param result
 	 * @param className
 	 */
-	public static void resultClassName(String result, String className) {
+	public static void resultClassName(String className, String result) {
 		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.className(className));
 		System.out.println(enterKey.getText());
 		assertEquals(result, enterKey.getText());
