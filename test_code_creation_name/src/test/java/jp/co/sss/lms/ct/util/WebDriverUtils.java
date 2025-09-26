@@ -163,6 +163,15 @@ public class WebDriverUtils {
 	}
 
 	/**
+	 * HTMLのvalue属性を取得し、エンターキーを押す
+	 * @param className
+	 */
+	public static void enterKeyValue(String valueName) {
+		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.xpath("//input[@value='valueName']"));
+		enterKey.sendKeys(Keys.ENTER);
+	}
+
+	/**
 	 * HTMLのclass属性を取得し、結果と合致してるか調べる
 	 * @param result
 	 * @param className
@@ -181,6 +190,18 @@ public class WebDriverUtils {
 		String title = webDriver.getTitle();
 		System.out.println(title);
 		assertEquals(result, title);
+	}
+
+	/**
+	 * HTMLのclass属性を取得し、入力値に値を入れエンターキーを押す
+	 * @param className
+	 * @param inputValue
+	 */
+	public static void enterClassName(String className, String inputValue) {
+		final WebElement value = WebDriverUtils.getElementByClassName(className);
+		value.clear();
+		value.sendKeys(inputValue);
+		value.sendKeys(Keys.ENTER);
 	}
 
 }

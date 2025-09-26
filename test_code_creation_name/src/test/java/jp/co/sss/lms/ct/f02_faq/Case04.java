@@ -56,6 +56,8 @@ public class Case04 {
 		WebDriverUtils.nameInput("password", "StudentAA033");
 		WebDriverUtils.enterKey("btn");
 
+		Thread.sleep(1000);
+
 		String pegeTitle = WebDriverUtils.getTitle();
 		assertEquals("コース詳細 | LMS", pegeTitle);
 
