@@ -9,8 +9,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import jp.co.sss.lms.ct.util.WebDriverUtils;
 
@@ -67,10 +65,7 @@ public class Case07 {
 	@Order(3)
 	@DisplayName("テスト03 未提出の研修日の「詳細」ボタンを押下しセクション詳細画面に遷移")
 	void test03() throws InterruptedException {
-
-		WebDriverUtils.webDriver
-				.findElement(By.xpath("//*[@id=\"main\"]/div/div[5]/div[2]/table/tbody/tr[4]/td[5]/form/input[3]"))
-				.sendKeys(Keys.ENTER);
+		WebDriverUtils.enterXpath("//*[@id=\"main\"]/div/div[5]/div[2]/table/tbody/tr[2]/td[5]/form/input[3]");
 
 		Thread.sleep(1000);
 		WebDriverUtils.resultTitle("セクション詳細 | LMS");
@@ -97,8 +92,7 @@ public class Case07 {
 		WebDriverUtils.enterKey("btn-primary");
 		Thread.sleep(1000);
 
-		// 下記のプログラムでエラーが発生
-		//WebDriverUtils.resultValue("btn-default", "提出済み日報【デモ】を確認する");
+		WebDriverUtils.resultValue("//*[@id=\"sectionDetail\"]/table/tbody/tr[2]/td/form/input[6]", "提出済み日報【デモ】を確認する");
 		getEvidence(new Object() {
 		});
 	}

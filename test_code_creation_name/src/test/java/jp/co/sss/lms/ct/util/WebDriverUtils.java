@@ -16,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.io.Files;
@@ -163,11 +164,11 @@ public class WebDriverUtils {
 	}
 
 	/**
-	 * HTMLのvalue属性を取得し、エンターキーを押す
-	 * @param className
+	 * HTMLのxpathを取得し、エンターキーを押す
+	 * @param xpath
 	 */
-	public static void enterKeyValue(String valueName) {
-		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.xpath(valueName));
+	public static void enterKeyValue(String xpath) {
+		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.xpath(xpath));
 		enterKey.sendKeys(Keys.ENTER);
 	}
 
@@ -191,11 +192,12 @@ public class WebDriverUtils {
 	}
 
 	/**
-	 * HTMLのタイトルを取得し、結果と合致してるか調べる
+	 * HTMLのvalue属性を取得し、結果と合致してるか調べる
+	 * @param xpath
 	 * @param result
 	 */
-	public static void resultValue(String className, String result) {
-		String value = WebDriverUtils.webDriver.findElement(By.className(className)).getAttribute("value");
+	public static void resultValue(String xpath, String result) {
+		String value = WebDriverUtils.webDriver.findElement(By.xpath(xpath)).getAttribute("value");
 		assertEquals(result, value);
 	}
 
@@ -223,6 +225,16 @@ public class WebDriverUtils {
 	}
 
 	/**
+	 * HTMLのid属性を取得し、プルダウンの値を選択する
+	 * @param id
+	 * @param inputValue
+	 */
+	public static void inputIdPull(String id, String inputValue) {
+		Select dropdown = new Select(WebDriverUtils.webDriver.findElement(By.id(id)));
+		dropdown.selectByVisibleText(inputValue);
+	}
+
+	/**
 	 * xpathの値を取得し、エンターを押す
 	 * @param xpath
 	 */
@@ -230,6 +242,15 @@ public class WebDriverUtils {
 		WebDriverUtils.webDriver
 				.findElement(By.xpath(xpath))
 				.sendKeys(Keys.ENTER);
+	}
+
+	/**
+	 * xpathの値を取得し、テキストの値と結果が合致しているかを返す
+	 * @param xpath
+	 */
+	public static void resultXpathText(String xpath, String result) {
+		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.xpath(xpath));
+		assertEquals(result, enterKey.getText());
 	}
 
 }
