@@ -235,6 +235,16 @@ public class WebDriverUtils {
 	}
 
 	/**
+	 * HTMLのname属性を取得し、プルダウンの値を選択する
+	 * @param name
+	 * @param inputValue
+	 */
+	public static void inputNamePull(String name, String inputValue) {
+		Select dropdown = new Select(WebDriverUtils.webDriver.findElement(By.name(name)));
+		dropdown.selectByVisibleText(inputValue);
+	}
+
+	/**
 	 * xpathの値を取得し、エンターを押す
 	 * @param xpath
 	 */
