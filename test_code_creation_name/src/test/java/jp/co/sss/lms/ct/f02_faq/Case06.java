@@ -105,7 +105,6 @@ public class Case06 {
 		WebDriverUtils.scrollBy("800");
 		Thread.sleep(1000);
 
-		System.out.println(WebDriverUtils.getElementsByClassName("text-primary").size());
 		assertEquals(3, WebDriverUtils.getElementsByClassName("text-primary").size());
 
 		getEvidence(new Object() {
@@ -117,8 +116,6 @@ public class Case06 {
 	@DisplayName("テスト06 検索結果の質問をクリックしその回答を表示")
 	void test06() {
 		WebDriverUtils.webDriver.findElement(By.className("mb10")).click();
-
-		System.out.println(WebDriverUtils.getElementsByClassName("fs18").size());
 		assertEquals(1, WebDriverUtils.getElementsByClassName("fs18").size());
 
 		getEvidence(new Object() {

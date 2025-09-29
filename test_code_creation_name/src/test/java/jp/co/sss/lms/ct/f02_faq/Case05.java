@@ -104,8 +104,6 @@ public class Case05 {
 	void test05() throws InterruptedException {
 		WebDriverUtils.enterClassName("form-control", "申し込み");
 		WebDriverUtils.scrollBy("800");
-
-		System.out.println(WebDriverUtils.getElementsByClassName("text-primary").size());
 		assertEquals(1, WebDriverUtils.getElementsByClassName("text-primary").size());
 
 		getEvidence(new Object() {
@@ -119,10 +117,7 @@ public class Case05 {
 		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.xpath("//input[@value='クリア']"));
 		enterKey.sendKeys(Keys.ENTER);
 
-		final WebElement result = WebDriverUtils.webDriver.findElement(By.className("form-control"));
-		System.out.println(result.getText());
-		assertEquals("", result.getText());
-
+		WebDriverUtils.resultClassName("form-control", "");
 		WebDriverUtils.scrollBy("0");
 
 		getEvidence(new Object() {

@@ -167,7 +167,7 @@ public class WebDriverUtils {
 	 * @param className
 	 */
 	public static void enterKeyValue(String valueName) {
-		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.xpath("//input[@value='valueName']"));
+		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.xpath(valueName));
 		enterKey.sendKeys(Keys.ENTER);
 	}
 
@@ -178,7 +178,6 @@ public class WebDriverUtils {
 	 */
 	public static void resultClassName(String className, String result) {
 		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.className(className));
-		System.out.println(enterKey.getText());
 		assertEquals(result, enterKey.getText());
 	}
 
@@ -188,8 +187,16 @@ public class WebDriverUtils {
 	 */
 	public static void resultTitle(String result) {
 		String title = webDriver.getTitle();
-		System.out.println(title);
 		assertEquals(result, title);
+	}
+
+	/**
+	 * HTMLのタイトルを取得し、結果と合致してるか調べる
+	 * @param result
+	 */
+	public static void resultValue(String className, String result) {
+		String value = WebDriverUtils.webDriver.findElement(By.className(className)).getAttribute("value");
+		assertEquals(result, value);
 	}
 
 	/**
@@ -202,6 +209,27 @@ public class WebDriverUtils {
 		value.clear();
 		value.sendKeys(inputValue);
 		value.sendKeys(Keys.ENTER);
+	}
+
+	/**
+	 * HTMLのclass属性を取得し、入力値に値を入れる
+	 * @param className
+	 * @param inputValue
+	 */
+	public static void inputClassName(String className, String inputValue) {
+		final WebElement value = WebDriverUtils.getElementByClassName(className);
+		value.clear();
+		value.sendKeys(inputValue);
+	}
+
+	/**
+	 * xpathの値を取得し、エンターを押す
+	 * @param xpath
+	 */
+	public static void enterXpath(String xpath) {
+		WebDriverUtils.webDriver
+				.findElement(By.xpath(xpath))
+				.sendKeys(Keys.ENTER);
 	}
 
 }
