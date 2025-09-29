@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import jp.co.sss.lms.ct.util.WebDriverUtils;
+
 /**
  * 結合テスト ログイン機能②
  * ケース15
@@ -35,21 +37,35 @@ public class Case15 {
 	@Order(1)
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
-		// TODO ここに追加
+		goTo("http://localhost:8080/lms");
+		WebDriverUtils.resultTitle("ログイン | LMS");
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
 	@Order(2)
 	@DisplayName("テスト02 DBに初期登録された未ログインの受講生ユーザーでログイン")
-	void test02() {
-		// TODO ここに追加
+	void test02() throws InterruptedException {
+		WebDriverUtils.nameInput("loginId", "StudentAA08");
+		WebDriverUtils.nameInput("password", "StudentAA08");
+		WebDriverUtils.enterKey("btn");
+
+		Thread.sleep(1000);
+
+		WebDriverUtils.resultTitle("セキュリティ規約 | LMS");
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
 	@Order(3)
 	@DisplayName("テスト03 「同意します」チェックボックスにチェックをせず「次へ」ボタンを押下")
 	void test03() {
-		// TODO ここに追加
+		WebDriverUtils.enterKey("btn-primary");
+		WebDriverUtils.resultClassName("error", "セキュリティ規約への同意は必須です。");
+		getEvidence(new Object() {
+		});
 	}
 
 }
