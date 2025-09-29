@@ -65,7 +65,7 @@ public class Case07 {
 	@Order(3)
 	@DisplayName("テスト03 未提出の研修日の「詳細」ボタンを押下しセクション詳細画面に遷移")
 	void test03() throws InterruptedException {
-		WebDriverUtils.enterXpath("//*[@id=\"main\"]/div/div[5]/div[2]/table/tbody/tr[2]/td[5]/form/input[3]");
+		WebDriverUtils.enterXpath("//*[@id=\"main\"]/div/div[3]/div[2]/table/tbody/tr[6]/td[5]/form/input[3]");
 
 		Thread.sleep(1000);
 		WebDriverUtils.resultTitle("セクション詳細 | LMS");
@@ -89,12 +89,15 @@ public class Case07 {
 	@DisplayName("テスト05 報告内容を入力して「提出する」ボタンを押下し確認ボタン名が更新される")
 	void test05() throws InterruptedException {
 		WebDriverUtils.inputClassName("form-control", "本日もありがとうございました。");
+		WebDriverUtils.resultValue("//*[@id=\"content_0\"]", "本日もありがとうございました。");
+		getEvidence(new Object() {
+		}, "提出前");
 		WebDriverUtils.enterKey("btn-primary");
 		Thread.sleep(1000);
 
 		WebDriverUtils.resultValue("//*[@id=\"sectionDetail\"]/table/tbody/tr[2]/td/form/input[6]", "提出済み日報【デモ】を確認する");
 		getEvidence(new Object() {
-		});
+		}, "提出後");
 	}
 
 }
