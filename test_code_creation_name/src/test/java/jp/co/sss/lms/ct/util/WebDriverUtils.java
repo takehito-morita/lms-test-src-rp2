@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -137,6 +138,14 @@ public class WebDriverUtils {
 	}
 
 	/**
+	 * xpathの値をクリック
+	 * @param xpath
+	 */
+	public static void xpathClick(String xpath) {
+		WebDriverUtils.webDriver.findElement(By.xpath(xpath)).click();
+	}
+
+	/**
 	 * タイトル取得
 	 */
 	public static String getTitle() {
@@ -261,6 +270,14 @@ public class WebDriverUtils {
 	public static void resultXpathText(String xpath, String result) {
 		final WebElement enterKey = WebDriverUtils.webDriver.findElement(By.xpath(xpath));
 		assertEquals(result, enterKey.getText());
+	}
+
+	/**
+	 * アラートの「OK」ボタンを押す
+	 */
+	public static void alertPutOK() {
+		Alert ok = WebDriverUtils.webDriver.switchTo().alert();
+		ok.accept();
 	}
 
 }

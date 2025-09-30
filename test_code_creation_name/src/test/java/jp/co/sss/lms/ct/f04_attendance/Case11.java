@@ -94,7 +94,7 @@ public class Case11 {
 		WebDriverUtils.inputIdPull("endMinute0", "00");
 		WebDriverUtils.inputNamePull("attendanceList[0].blankTime", "15分");
 		WebDriverUtils.nameInput("attendanceList[0].note", "研修最高でした！本当にありがとうございました！");
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 		WebDriverUtils.resultValue("//*[@id=\"main\"]/div/div/form/table/tbody/tr[1]/td[12]/input",
 				"研修最高でした！本当にありがとうございました！");
 		getEvidence(new Object() {
